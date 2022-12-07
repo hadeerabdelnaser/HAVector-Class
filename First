@@ -1,8 +1,4 @@
-// A program to demo a template vector class
-// Author: Yusef Elzayat
-// 13 Nov 2022
 
-/*
  XYVector(T*,intn) // Aya
  XYVector(constXYVector&) //Hadeer
  XYVector &operator=(const Vector&&); //Hadeer
@@ -34,17 +30,17 @@
 using namespace std;
 
 template <class T>
-class YousefVector{
+class HAVector{
 private:
     int size, capacity;
     T* data;
 public:
-    YousefVector(int cap = 2){ //constructor(int)
+    HAVector(int cap = 2){ //constructor(int)
         capacity = cap;
         size = 0;
         data = new T[capacity];
     }
-    ~YousefVector(){//destructor()
+    ~HAVector(){//destructor()
         delete[] data;
     }
     T& operator[](int indx){ // Access modi
@@ -95,7 +91,7 @@ public:
 };
 
 int main(){
-    YousefVector <string> vec(1);
+    HAVector <string> vec(1);
     vec.push_back((string) "Hello");
     vec.push_back((string) "Neehaw");
     vec.push_back((string) "Bonjour");
@@ -108,7 +104,7 @@ int main(){
         cout << vec[i] << endl;
     }
     cout << endl << endl;
-    YousefVector <string> vec2;
+    HAVector <string> vec2;
     vec2 = vec;
     vec2[0] = "Salam Alykum231";
 
