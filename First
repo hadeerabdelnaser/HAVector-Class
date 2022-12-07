@@ -96,30 +96,27 @@ public:
 
     }
 
-    T pop_back(){
-        size = size - 1;
-        capacity = capacity -1 ;
-        auto P = new T[size];
-        for(int i = 0; i < size; i++){
-            P[i] = data[i];
-        }
-        delete [] data;
-        data = P;
-        return *data;
+   T pop_back(){
+        return data[--size];
     }
     void erase (auto iterator1,auto iterator2)
     {
-        size = size -(iterator1-iterator2+1);
-        capacity = capacity -(iterator1-iterator2+1) ;
-        auto P = new T[size];
-        for(int i = 0; i < iterator1; i++){
-            P[i] = data[i];
+        if(iterator2 <= size && iterator1 <= size && iterator1<=iterator2){
+            auto P = new T[size];
+            for(int i = 0; i < iterator1-1; i++){
+                P[i] = data[i];
+            }
+            for(int i = iterator2; i < size; i++){
+                P[i] = data[i];
+            }
+            delete [] data;
+            data = P;
+            size -= (iterator2-iterator1+1);
         }
-        for(int i = iterator2+1; i < size; i++){
-            P[i] = data[i];
+        else{
+            cout<<"This range can't be erased.\n";
         }
-        delete [] data;
-        data = P;
+
     }
 
 };
@@ -145,14 +142,26 @@ int main(){
     for(int i = 0; i < vec2.getSize(); i++){
         cout << vec2[i] << endl;
     }
-    string arr[3];
+   string arr[3];
     arr[0]="aya";arr[1]="Ali";arr[2]="Hassan";
     HAVector<string> vec3(arr,3);
-    vec3.erase(1,1);
-    vec3.pop_back();
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
+    cout<<endl;
+    vec3.pop_back();
+
+    for(int i = 0; i < vec3.getSize(); i++){
+        cout << vec3[i] << endl;
+    }
+    cout<<endl;
+    vec3.erase(2,2);
+
+    for(int i = 0; i < vec3.getSize(); i++){
+        cout << vec3[i] << endl;
+    }
+    cout<<endl;
+    cout<<vec3.getSize();
 
 
 
