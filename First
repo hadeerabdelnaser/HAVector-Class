@@ -1,8 +1,8 @@
 /*
- XYVector(T*,intn) // Aya
+ XYVector(T*,intn) // Aya //////////////Done
  XYVector(constXYVector&) //Hadeer
  XYVector &operator=(const Vector&&); //Hadeer
- T pop_back() //Aya
+ T pop_back() //Aya //////////////Done
  void erase(iterator) //Hadeer
  _________________________
  1[0] 2[1] 3[2] 4[3]
@@ -10,7 +10,7 @@
  decrease 4's position to 1
  and the size of the vector will be decreased by one
  ___________________________________________
- void erase(iterator1,iterator2) //Aya
+ void erase(iterator1,iterator2) //Aya //////////Done
  void clear() //Hadeer
  operations on iterators(*,++,+,begin,end) //Aya
  void insert(iterator,T) //Hadeer
@@ -85,8 +85,42 @@ public:
             cout << "Cannot delete self" << endl;
         }
     }
+    HAVector(T* arr,int n)
+    {
+            size = n;
+            capacity = n;
+            data = new T[capacity];
+            for(int i = 0; i < n; i++){
+                data[i] = arr[i];
+            }
 
+    }
 
+    T pop_back(){
+        size = size - 1;
+        capacity = capacity -1 ;
+        auto P = new T[size];
+        for(int i = 0; i < size; i++){
+            P[i] = data[i];
+        }
+        delete [] data;
+        data = P;
+        return *data;
+    }
+    void erase (auto iterator1,auto iterator2)
+    {
+        size = size -(iterator1-iterator2+1);
+        capacity = capacity -(iterator1-iterator2+1) ;
+        auto P = new T[size];
+        for(int i = 0; i < iterator1; i++){
+            P[i] = data[i];
+        }
+        for(int i = iterator2+1; i < size; i++){
+            P[i] = data[i];
+        }
+        delete [] data;
+        data = P;
+    }
 
 };
 
@@ -111,4 +145,15 @@ int main(){
     for(int i = 0; i < vec2.getSize(); i++){
         cout << vec2[i] << endl;
     }
+    string arr[3];
+    arr[0]="aya";arr[1]="Ali";arr[2]="Hassan";
+    HAVector<string> vec3(arr,3);
+    vec3.erase(1,1);
+    vec3.pop_back();
+    for(int i = 0; i < vec3.getSize(); i++){
+        cout << vec3[i] << endl;
+    }
+
+
+
 }
