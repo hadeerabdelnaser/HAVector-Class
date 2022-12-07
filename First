@@ -1,7 +1,7 @@
 /*
  XYVector(T*,intn) // Aya //////////////Done
- XYVector(constXYVector&) //Hadeer
- XYVector &operator=(const Vector&&); //Hadeer
+ XYVector(constXYVector&) //Hadeer //////Done
+ XYVector &operator=(const Vector&&); //Hadeer ///////Done
  T pop_back() //Aya //////////////Done
  void erase(iterator) //Hadeer
  _________________________
@@ -13,12 +13,12 @@
  void erase(iterator1,iterator2) //Aya //////////Done
  void clear() //Hadeer
  operations on iterators(*,++,+,begin,end) //Aya
- void insert(iterator,T) //Hadeer
- booloperator==(constXYVector<T>&) //Hadeer
- booloperator<(constXYVector<T>&) //Hadeer
- int capacity()const//Returnsizeofcurrentallocatedarray //Hadeer
- int resize() //Relocatetobiggerspace //Hadeer
- bool empty() //Hadeer
+ void insert(iterator,T) //Hadeer 
+ booloperator==(constXYVector<T>&) //Hadeer ////////Done
+ booloperator<(constXYVector<T>&) //Hadeer ////////////Done
+ int capacity()const//Returnsizeofcurrentallocatedarray //Hadeer //////////Done
+ int resize() //Relocatetobiggerspace //Hadeer /////////////Done
+ bool empty() //Hadeer  ////////Done
  friend ostream&operator<<(ostream&out,XYvector<T>) //Hadeer
 
 
@@ -71,7 +71,7 @@ public:
     int getSize(){
         return size;
     }
-    T& operator=(const T& other){
+    T& operator=(const T& other){   //copy Ass
         if(this != &other){
             delete[] data;
             size = other.size;
@@ -118,6 +118,77 @@ public:
         }
 
     }
+    //Hadeer
+       HAVector(const T& other){         // copy constructor.
+        size = other.size;
+        capacity = other.capacity;
+        data = new T[capacity];
+        for(int i = 0; i < other.size; i++){
+            data[i] = other.data[i];
+        }}
+        
+        
+        T& operator=(const T&& other){           // move ass
+        if(this != &other){
+            delete[] data;
+            size = other.size;
+            capacity = other.capacity;
+            data = new T[capacity];
+            for(int i = 0; i < other.size; i++){
+                data[i] = other.data[i];
+            }
+        }
+        else{
+            cout << "Cannot delete self" << endl;
+        }
+    }
+    
+     bool operator==(const  HAVector<T>& vec2){
+        int count = 0;
+        if(size == vec2.size){
+            for (int i = 0; i < vec2.size ; ++i) {
+                if(data[i] == vec2.data[i]){
+                    count++;
+                }
+            }
+            if(count == size){
+                return true;
+            }
+    }}
+    
+    bool operator<(const HAVector<T>& vec){
+        if (size < vec.size){
+            return true;
+        }
+        else if (size == vec.size){
+            for (int i = 0; i < vec.size ; ++i) {
+                if(data[i] < vec.data[i]){
+                    return true;
+        }
+                break;
+
+            }
+        }
+    }
+    
+    int resize(){
+        int n;
+       // cout <<""
+        cin >> n;
+        cout << "Resizing to " << capacity*n << endl;
+
+        capacity *= n;
+    }
+    int getcapacity(){
+        return capacity;
+    }
+    bool empty(){
+        if(getSize() == 0){
+            return true;
+        }
+
+
+    }
 
 };
 
@@ -142,6 +213,10 @@ int main(){
     for(int i = 0; i < vec2.getSize(); i++){
         cout << vec2[i] << endl;
     }
+    if((vec == vec2)){
+    cout <<"equal"<< endl;
+    }
+    if((vec < vec2)){cout << "first vector is smaller." << endl;}
    string arr[3];
     arr[0]="aya";arr[1]="Ali";arr[2]="Hassan";
     HAVector<string> vec3(arr,3);
@@ -161,7 +236,10 @@ int main(){
         cout << vec3[i] << endl;
     }
     cout<<endl;
-    cout<<vec3.getSize();
+    cout << vec3.getSize();
+    cout << vec3.getcapacity();
+    if(vec3.empty()){ cout << "vector is empty" << endl;}
+
 
 
 
