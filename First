@@ -153,7 +153,20 @@ public:
     {
         return data+(size-1);
     }
-
+    
+    // insert
+   void insert( int indx ,T x) {
+        if (indx < 0 || indx > size - 1) {
+            cout << "An error has occured, index out of range." << endl;
+            exit(-1);
+        } else {
+            size += 1;
+            for (int i = size - 1; i > indx; --i) {
+                data[i] = data[i - 1];
+            }
+            data[indx] = x;
+        }
+    }
     //Hadeer
        HAVector(const T& other){         // copy constructor.
         size = other.size;
@@ -223,6 +236,14 @@ public:
             return true;
         }
 
+
+    }
+      friend ostream &operator<<(ostream &out, const HAVector<T> vec) {
+
+        for (int i = 0; i < vec.size; ++i) {
+            out << vec.data[i];
+        }
+        return out;
 
     }
 
