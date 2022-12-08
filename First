@@ -96,10 +96,10 @@ public:
 
     }
 
-   T pop_back(){
+    T pop_back(){
         return data[--size];
     }
-   void erase (auto iterator1,auto iterator2)
+    void erase (auto iterator1,auto iterator2)
     {
         if(iterator2 <= size && iterator1 <= size && iterator1<=iterator2){
             auto P = new T[size];
@@ -123,8 +123,6 @@ public:
     }
     void erase (auto iterator)
     {
-        //0[aya] 1[ali] 2[hassan]
-        // 2
         if(iterator <= size ){
             auto P = new T[size];
             int j=0;
@@ -145,6 +143,16 @@ public:
         }
 
     }
+    iterator begin()
+    {
+        return data;
+    }
+
+    iterator end()
+    {
+        return data+(size-1);
+    }
+
     //Hadeer
        HAVector(const T& other){         // copy constructor.
         size = other.size;
@@ -244,34 +252,42 @@ int main(){
     cout <<"equal"<< endl;
     }
     if((vec < vec2)){cout << "first vector is smaller." << endl;}
-  string arr[5];
-    arr[0]="Aya";arr[1]="Ali";arr[2]="Hassan";arr[3]="Ali";arr[4]="....";
-    HAVector<string> vec3(arr,5);
+    string arr[7];
+    arr[0]="Aya";arr[1]="Ali";arr[2]="Hassan";arr[3]="Ali";arr[4]="Teammate";arr[5]="Hadder";arr[6]="Abdelnasser";
+    HAVector<string> vec3(arr,7);
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
     cout<<endl;
-    vec3.pop_back();//Aya Ali Hassan Ali
+    vec3.pop_back();//Aya Ali Hassan Ali teammate Hadder
 
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
     cout<<endl;
-    vec3.erase(1,2); //Hassan Ali
+    vec3.erase(1,1); //Ali Hassan Ali teammate Hadder
 
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
     cout<<endl;
-    cout<<vec3.getSize()<<endl;
+    cout<<vec3.getSize()<<endl;//5
 
-    vec3.erase(1); //Ali
+    vec3.erase(1); // Hassan Ali teammate Hadder
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
-    cout << vec3.getSize();
-    cout << vec3.getcapacity();
-    if(vec3.empty()){ cout << "vector is empty" << endl;}
+    cout<<endl;
+    cout<<*vec3.begin()<<endl;//Hassan
+    cout<<*vec3.end()<<endl;//Hadder
+     HAVector<string> :: iterator it = vec3.begin();
+     cout<<*it<<endl;//Hassan
+     it++;
+    cout<<*it<<endl;//Ali
+     HAVector<string> :: iterator it2 = it+1;
+     cout<< *it2;//teammate
+
+
 
 
 
