@@ -35,6 +35,7 @@ private:
     int size, capacity;
     T* data;
 public:
+   typedef T* iterator;
     HAVector(int cap = 2){ //constructor(int)
         capacity = cap;
         size = 0;
