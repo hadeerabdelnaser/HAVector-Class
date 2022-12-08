@@ -3,7 +3,7 @@
  XYVector(constXYVector&) //Hadeer //////Done
  XYVector &operator=(const Vector&&); //Hadeer ///////Done
  T pop_back() //Aya //////////////Done
- void erase(iterator) //Hadeer
+ void erase(iterator) //Hadeer /////Done
  _________________________
  1[0] 2[1] 3[2] 4[3]
  we want to erase 3 in index 2
@@ -99,19 +99,46 @@ public:
    T pop_back(){
         return data[--size];
     }
-    void erase (auto iterator1,auto iterator2)
+   void erase (auto iterator1,auto iterator2)
     {
         if(iterator2 <= size && iterator1 <= size && iterator1<=iterator2){
             auto P = new T[size];
+            int j=0;
             for(int i = 0; i < iterator1-1; i++){
-                P[i] = data[i];
+                P[j] = data[i];
+                j++;
             }
             for(int i = iterator2; i < size; i++){
-                P[i] = data[i];
+                P[j] = data[i];
+                j++;
             }
             delete [] data;
             data = P;
             size -= (iterator2-iterator1+1);
+        }
+        else{
+            cout<<"This range can't be erased.\n";
+        }
+
+    }
+    void erase (auto iterator)
+    {
+        //0[aya] 1[ali] 2[hassan]
+        // 2
+        if(iterator <= size ){
+            auto P = new T[size];
+            int j=0;
+            for(int i = 0; i < iterator-1; i++){
+                P[j] = data[i];
+                j++;
+            }
+            for(int i = iterator; i < size; i++){
+                P[j] = data[i];
+                j++;
+            }
+            delete [] data;
+            data = P;
+            size --;
         }
         else{
             cout<<"This range can't be erased.\n";
@@ -217,25 +244,31 @@ int main(){
     cout <<"equal"<< endl;
     }
     if((vec < vec2)){cout << "first vector is smaller." << endl;}
-   string arr[3];
-    arr[0]="aya";arr[1]="Ali";arr[2]="Hassan";
-    HAVector<string> vec3(arr,3);
+  string arr[5];
+    arr[0]="Aya";arr[1]="Ali";arr[2]="Hassan";arr[3]="Ali";arr[4]="....";
+    HAVector<string> vec3(arr,5);
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
     cout<<endl;
-    vec3.pop_back();
+    vec3.pop_back();//Aya Ali Hassan Ali
 
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
     cout<<endl;
-    vec3.erase(2,2);
+    vec3.erase(1,2); //Hassan Ali
 
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
     cout<<endl;
+    cout<<vec3.getSize()<<endl;
+
+    vec3.erase(1); //Ali
+    for(int i = 0; i < vec3.getSize(); i++){
+        cout << vec3[i] << endl;
+    }
     cout << vec3.getSize();
     cout << vec3.getcapacity();
     if(vec3.empty()){ cout << "vector is empty" << endl;}
