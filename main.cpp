@@ -178,32 +178,41 @@ public:
         return data+(size-1);
     }
 
-    bool operator==(const  HAVector<T>& vec2){
+      bool operator==(const HAVector<T> &vec2) {
         int count = 0;
-        if(size == vec2.size){
-            for (int i = 0; i < vec2.size ; ++i) {
-                if(data[i] == vec2.data[i]){
+        if (size == vec2.size) {
+            for (int i = 0; i < vec2.size; ++i) {
+                if (data[i] == vec2.data[i]) {
                     count++;
                 }
             }
-            if(count == size){
+            if (count == size) {
                 return true;
+            } else {
+                return false;
             }
-        }}
+        } else {
+            return false;
+        }
+    }
 
-    bool  operator<(const HAVector<T>& vec){
-        if (size < vec.size){
+    bool operator<(const HAVector<T> &vec) {
+        if (size < vec.size) {
             return true;
-        }
-        else if (size == vec.size){
-            for (int i = 0; i < vec.size ; ++i) {
-                if(data[i] < vec.data[i]){
+        } else if (size == vec.size) {
+            for (int i = 0; i < vec.size; ++i) {
+                if (data[i] < vec.data[i]) {
                     return true;
+                } else {
+                    return false;
                 }
-                break;
 
             }
+        } else {
+            return false;
         }
+
+
     }
 
     int getSize(){
@@ -214,12 +223,10 @@ public:
         return capacity;
     }
 
-    int resize(){
-        int n;
-        cin >> n;
-        cout << "Resizing to " << capacity*n << endl;
+     int resize(int n) {
 
-        capacity *= n;
+        cout << "Resizing to " << size * n << endl;
+        size *= n;
     }
 
     bool empty() {
