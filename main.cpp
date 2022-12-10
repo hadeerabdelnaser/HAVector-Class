@@ -73,8 +73,7 @@ public:
     // Access modi
     T& operator[](int indx){
         if(indx > size-1){
-            cout << "An error has occured, index out of range." << endl;
-            exit(-1);
+           throw "INVALID.";
         }
         return data[indx];
     }
@@ -119,7 +118,7 @@ public:
             size -= (iterator2-iterator1+1);
         }
         else{
-            cout<<"This range can't be erased.\n";
+           throw "INVALID.";
         }
 
     }
@@ -143,7 +142,7 @@ public:
             size --;
         }
         else{
-            cout<<"This range can't be erased.\n";
+           throw "INVALID.";
         }
 
     }
@@ -157,8 +156,7 @@ public:
         // HAvector<string>::iterator it = vec3.begin();
         // vec3.insert(it,"Hadder")
         if (indx < 0 || indx > size - 1) {
-            cout << "An error has occured, index out of range." << endl;
-            exit(-1);
+            throw "INVALID.";
         } else {
             size += 1;
             for (int i = size - 1; i > indx; --i) {
@@ -178,7 +176,7 @@ public:
         return data+(size-1);
     }
 
-      bool operator==(const HAVector<T> &vec2) {
+    bool operator==(const HAVector<T> &vec2) {
         int count = 0;
         if (size == vec2.size) {
             for (int i = 0; i < vec2.size; ++i) {
@@ -223,7 +221,7 @@ public:
         return capacity;
     }
 
-     int resize(int n) {
+    int resize(int n) {
 
         cout << "Resizing to " << size * n << endl;
         size *= n;
@@ -260,7 +258,12 @@ int main(){
     vec.push_back((string) "Guten Tag");
     vec.push_back((string) "Salam Alykum");
     vec.push_back((string) "Hola");
-    vec[0] = "Hellooooo";
+    try{
+        vec[0] = "Hellooooo";
+    }
+    catch(const char * s){
+        cout<<"Exception :"<<s<<endl;
+    }
 
     for(int i = 0; i < vec.getSize(); i++){
         cout << vec[i] << endl;
@@ -278,27 +281,39 @@ int main(){
     }
     if((vec < vec2)){cout << "first vector is smaller." << endl;}
     string arr[7];
-    arr[0]="Aya";arr[1]="Ali";arr[2]="Hassan";arr[3]="Ali";arr[4]="Teammate";arr[5]="Hadder";arr[6]="Abdelnasser";
+    arr[0]="Aya";arr[1]="Ali";arr[2]="Hassan";arr[3]="Ali";
+    arr[4]="Teammate";arr[5]="Hadder";arr[6]="Abdelnasser";
     HAVector<string> vec3(arr,7);
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
     cout<<endl;
-    vec3.pop_back();//Aya Ali Hassan Ali teammate Hadder
+    vec3.pop_back();
+    //Aya Ali Hassan Ali teammate Hadder
 
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
     cout<<endl;
-    vec3.erase(1,1); //Ali Hassan Ali teammate Hadder
-
+    try{
+        vec3.erase(1,1);
+    }
+    catch(const char * s){
+        cout<<"Exception :"<<s<<endl;
+    }
+    //Ali Hassan Ali teammate Hadder
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
     cout<<endl;
     cout<<vec3.getSize()<<endl;//5
-
-    vec3.erase(1); // Hassan Ali teammate Hadder
+    try{
+        vec3.erase(1);
+    }
+    catch(const char * s){
+        cout<<"Exception :"<<s<<endl;
+    }
+    // Hassan Ali teammate Hadder
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
@@ -312,7 +327,12 @@ int main(){
     HAVector<string> :: iterator it2 = it+1;
     //Hassan Ali Teammate Hadder
     cout<< *it2<<endl;//teammate
-    vec3.insert(2,"Hadeer");
+    try{
+        vec3.insert(1,"Hadeer");
+    }
+    catch(const char * s){
+        cout<<"Exception :"<<s<<endl;
+    }
     for(int i = 0; i < vec3.getSize(); i++){
         cout << vec3[i] << endl;
     }
