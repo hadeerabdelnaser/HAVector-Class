@@ -220,11 +220,19 @@ public:
     int  getcapacity(){
         return capacity;
     }
+    
+   int resize(int n) {
+        cout << "Resizing to " << n << endl;
+        T * newdata = new T[n];
+        capacity = n;
 
-    int resize(int n) {
+        for (int i = 0; i < min(n, size); i++) {
+            newdata[i] = data[i];
+        }
+        delete[] data;
+        data = newdata;
+        newdata = nullptr;
 
-        cout << "Resizing to " << size * n << endl;
-        size *= n;
     }
 
     bool empty() {
