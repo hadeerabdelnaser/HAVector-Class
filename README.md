@@ -1,8 +1,10 @@
 # HA_Vector
  
-Made by: Hadeer Abdelnasser -  Aya Ali
+Made by:  [**Aya Ali**](https://github.com/ayaaalli) - [**Hadeer Abdelnasser**](https://github.com/hadeerabdelnaser)
 
 Requested by: Dr. Mohammed El-Ramly in Object Oriented Programming course (Assingment 3)
+
+About HA_Vector :
 -----------------------------------------------------------------------------------------------------
 HA_Vector is a C++ class with all the important functionalities implemented in vector class template.
 
